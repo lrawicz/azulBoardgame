@@ -1,0 +1,250 @@
+<!-- ./client/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+      <!-- socket.io-->
+        <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"
+        integrity="sha384-DkkWv9oJFWLIydBXXjkBWnG1/fuVhw8YPBq37uvvD6WSYRFRqr21eY5Dg9ZhmWdy" crossorigin="anonymous"></script>
+      <!-- webpack-->
+
+  </head>
+  <body>
+<div class="container" id="loginPage" >
+  <div class="row">
+    <div class="col-lg-3 col-md-2"></div>
+    <div class="col-lg-6 col-md-8 login-box">
+      <div class="col-lg-12 login-key">
+        <i class="fa fa-key" aria-hidden="true"></i>
+      </div>
+      <div class="col-lg-12 login-title">
+        Login
+      </div>
+
+      <div class="col-lg-12 login-form">
+        <div class="col-lg-12 login-form">
+          <form>
+            <div class="form-group">
+              <label class="form-control-label">USERNAME</label>
+              <input id="loginUserName" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+              <label class="form-control-label">ROOM</label>
+              <input id="loginRoomName" type="text" class="form-control">
+            </div>
+
+            <div class="col-lg-12 loginbttm">
+              <div class="col-lg-6 login-btm login-text">
+                <div id="loginError">
+                </div>
+                <!-- Error Message -->
+              </div>
+              <div class="col-lg-6 login-btm login-button">
+              <button id="login-button" type="button" class="btn btn-outline-primary">JOIN</button>              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-2"></div>
+    </div>
+  </div>
+</div>
+
+
+<div class="game2">
+  <div></div>
+  <div class= "game_core horizontal">
+    <div>
+          <div class="publicBoard flex">
+            <div class="example"></div>
+            <div id="factory1" class="factory  factory1_show">
+              <div class="coin coinRed" onclick="Game.pickClick(this)" onmouseover="Game.pickMouseOver(this)"></div>
+              <div class="coin coinYellow" onclick="Game.pickClick(this)" onmouseover="Game.pickMouseOver(this)"></div>
+              <div class="coin coinRed" onclick="Game.pickClick(this)" onmouseover="Game.pickMouseOver(this)"></div>
+              <div class="coin coinBlue" onclick="Game.pickClick(this)" onmouseover="Game.pickMouseOver(this)"></div>
+            </div>
+          
+            <div id="factory2" class="factory  factory2_show">
+              <div class="coin coinRed" onclick="Game.pickClick(this)" onmouseover="Game.pickMouseOver(this)"></div>
+              <div class="coin coinYellow" onclick="Game.pickClick(this)" onmouseover="Game.pickMouseOver(this)"></div>
+              <div class="coin coinRed" onclick="Game.pickClick(this)" onmouseover="Game.pickMouseOver(this)"></div>
+              <div class="coin coinBlue" onclick="Game.pickClick(this)" onmouseover="Game.pickMouseOver(this)"></div>
+            </div>
+          
+            <div id="factory3" class="factory  factory3_show">
+              <div class="coin coinRed" onclick="Game.pickClick(this)" onmouseover="Game.pickMouseOver(this)"></div>
+              <div class="coin coinYellow" onclick="Game.pickClick(this)" onmouseover="Game.pickMouseOver(this)"></div>
+              <div class="coin coinRed" onclick="Game.pickClick(this)" onmouseover="Game.pickMouseOver(this)"></div>
+              <div class="coin coinBlue" onclick="Game.pickClick(this)" onmouseover="Game.pickMouseOver(this)"></div>
+            </div>
+          
+          
+            <div id="factory4" class="factory  factory4_show">
+              <div class="coin coinRed" onclick="Game.pickClick(this)" onmouseover="Game.pickMouseOver(this)"></div>
+              <div class="coin coinYellow" onclick="Game.pickClick(this)" onmouseover="Game.pickMouseOver(this)"></div>
+              <div class="coin coinRed" onclick="Game.pickClick(this)" onmouseover="Game.pickMouseOver(this)"></div>
+              <div class="coin coinBlue" onclick="Game.pickClick(this)" onmouseover="Game.pickMouseOver(this)"></div>
+            </div>
+          
+            <div id="factory5" class="factory  factory5_show">
+              <div class="coin coinRed" onclick="Game.pickClick(this)" onmouseover="Game.pickMouseOver(this)"></div>
+              <div class="coin coinYellow" onclick="Game.pickClick(this)" onmouseover="Game.pickMouseOver(this)"></div>
+              <div class="coin coinRed" onclick="Game.pickClick(this)" onmouseover="Game.pickMouseOver(this)"></div>
+              <div class="coin coinBlue" onclick="Game.pickClick(this)" onmouseover="Game.pickMouseOver(this)"></div>
+            </div>
+          
+            <div id="factory6" class="factory  factory6_show">
+              <div class="coin coinRed" onclick="Game.pickClick(this)" onmouseover="Game.pickMouseOver(this)"></div>
+              <div class="coin coinYellow" onclick="Game.pickClick(this)" onmouseover="Game.pickMouseOver(this)"></div>
+              <div class="coin coinRed" onclick="Game.pickClick(this)" onmouseover="Game.pickMouseOver(this)"></div>
+              <div class="coin coinBlue" onclick="Game.pickClick(this)" onmouseover="Game.pickMouseOver(this)"></div>
+            </div>
+          
+            <div id="factory7" class="factory  factory7_show">
+              <div class="coin coinRed" onclick="Game.pickClick(this)" onmouseover="Game.pickMouseOver(this)"></div>
+              <div class="coin coinYellow" onclick="Game.pickClick(this)" onmouseover="Game.pickMouseOver(this)"></div>
+              <div class="coin coinRed" onclick="Game.pickClick(this)" onmouseover="Game.pickMouseOver(this)"></div>
+              <div class="coin coinBlue" onclick="Game.pickClick(this)" onmouseover="Game.pickMouseOver(this)"></div>
+            </div>
+          
+            <div id="factory8" class="factory  factory8_show">
+              <div class="coin coinRed" onclick="Game.pickClick(this)" onmouseover="Game.pickMouseOver(this)"></div>
+              <div class="coin coinYellow" onclick="Game.pickClick(this)" onmouseover="Game.pickMouseOver(this)"></div>
+              <div class="coin coinRed" onclick="Game.pickClick(this)" onmouseover="Game.pickMouseOver(this)"></div>
+              <div class="coin coinBlue" onclick="Game.pickClick(this)" onmouseover="Game.pickMouseOver(this)"></div>
+            </div>
+          
+          
+            <div id="factory9" class="factory  factory9_show">
+              <div class="coin coinRed" onclick="Game.pickClick(this)" onmouseover="Game.pickMouseOver(this)"></div>
+              <div class="coin coinYellow" onclick="Game.pickClick(this)" onmouseover="Game.pickMouseOver(this)"></div>
+              <div class="coin coinRed" onclick="Game.pickClick(this)" onmouseover="Game.pickMouseOver(this)"></div>
+              <div class="coin coinBlue" onclick="Game.pickClick(this)" onmouseover="Game.pickMouseOver(this)"></div>
+            </div>
+          
+            <div id="factory10" class="factory  factory10_show">
+              <div class="coin coinRed" onclick="Game.pickClick(this)" onmouseover="Game.pickMouseOver(this)"></div>
+              <div class="coin coinYellow" onclick="Game.pickClick(this)" onmouseover="Game.pickMouseOver(this)"></div>
+              <div class="coin coinRed" onclick="Game.pickClick(this)" onmouseover="Game.pickMouseOver(this)"></div>
+              <div class="coin coinBlue" onclick="Game.pickClick(this)" onmouseover="Game.pickMouseOver(this)"></div>
+            </div>
+          
+            <div id="factory11" class="factory  factory11_show">
+              <div class="coin coinRed" onclick="Game.pickClick(this)" onmouseover="Game.pickMouseOver(this)"></div>
+              <div class="coin coinYellow" onclick="Game.pickClick(this)" onmouseover="Game.pickMouseOver(this)"></div>
+              <div class="coin coinRed" onclick="Game.pickClick(this)" onmouseover="Game.pickMouseOver(this)"></div>
+              <div class="coin coinBlue" onclick="Game.pickClick(this)" onmouseover="Game.pickMouseOver(this)"></div>
+            </div>
+          
+          
+          </div>
+    </div>
+    <div>
+            <div class="private_board">
+              <div class="PB_Row1">
+                <div class="Row1_1 "></div>
+                <div class="Row1_2 "></div>
+              </div>
+              <div class="PB_Row2">
+            
+                <div class="PB_Left">
+            
+                  <div class="logo"></div>
+            
+                  <div id="places11" class="placeRow1" onmouseover="Game.playCoinOver(this)" onclick="Game.playCoinClick(this)"></div>
+            
+                  <div id="places12" class="placeRow2" onmouseover="Game.playCoinOver(this)" onclick="Game.playCoinClick(this)"></div>
+                  <div id="places22" class="placeRow2" onmouseover="Game.playCoinOver(this)" onclick="Game.playCoinClick(this)"></div>
+            
+                  <div id="places13" class="placeRow3" onmouseover="Game.playCoinOver(this)" onclick="Game.playCoinClick(this)"></div>
+                  <div id="places23" class="placeRow3" onmouseover="Game.playCoinOver(this)" onclick="Game.playCoinClick(this)"></div>
+                  <div id="places33" class="placeRow3" onmouseover="Game.playCoinOver(this)" onclick="Game.playCoinClick(this)"></div>
+            
+                  <div id="places14" class="placeRow4" onmouseover="Game.playCoinOver(this)" onclick="Game.playCoinClick(this)"></div>
+                  <div id="places24" class="placeRow4" onmouseover="Game.playCoinOver(this)" onclick="Game.playCoinClick(this)"></div>
+                  <div id="places34" class="placeRow4" onmouseover="Game.playCoinOver(this)" onclick="Game.playCoinClick(this)"></div>
+                  <div id="places44" class="placeRow4" onmouseover="Game.playCoinOver(this)" onclick="Game.playCoinClick(this)"></div>
+            
+                  <div id="places15" class="placeRow5" onmouseover="Game.playCoinOver(this)" onclick="Game.playCoinClick(this)"></div>
+                  <div id="places25" class="placeRow5" onmouseover="Game.playCoinOver(this)" onclick="Game.playCoinClick(this)"></div>
+                  <div id="places35" class="placeRow5" onmouseover="Game.playCoinOver(this)" onclick="Game.playCoinClick(this)"></div>
+                  <div id="places45" class="placeRow5" onmouseover="Game.playCoinOver(this)" onclick="Game.playCoinClick(this)"></div>
+                  <div id="places55" class="placeRow5" onmouseover="Game.playCoinOver(this)" onclick="Game.playCoinClick(this)"></div>
+                </div>
+            
+                <div class="PB_divisor"></div>
+                <div class="PB_Right">
+            
+                  <div class="PR_Column1 PR_Row1 PW_Anim1 PR_transp PR_Red"></div>
+                  <div class="PR_Column2 PR_Row1 PR_transp PR_Pink"></div>
+                  <div class="PR_Column3 PR_Row1 PR_transp PR_Blue"></div>
+                  <div class="PR_Column4 PR_Row1 PR_transp PR_Yellow"></div>
+                  <div class="PR_Column5 PR_Row1 PR_transp PR_Black"></div>
+            
+                  <div class="PR_Column1 PR_Row2 PR_transp PR_Black"></div>
+                  <div class="PR_Column2 PR_Row2 PR_transp PR_Red"></div>
+                  <div class="PR_Column3 PR_Row2 PR_transp PR_Pink"></div>
+                  <div class="PR_Column4 PR_Row2 PR_transp PR_Blue"></div>
+                  <div class="PR_Column5 PR_Row2 PR_transp PR_Yellow"></div>
+            
+                  <div class="PR_Column1 PR_Row3 PR_transp PR_Yellow"></div>
+                  <div class="PR_Column2 PR_Row3 PR_transp PR_Black"></div>
+                  <div class="PR_Column3 PR_Row3 PR_transp PR_Red"></div>
+                  <div class="PR_Column4 PR_Row3 PR_transp PR_Pink"></div>
+                  <div class="PR_Column5 PR_Row3 PR_transp PR_Blue"></div>
+            
+            
+                  <div class="PR_Column1 PR_Row4 PR_transp PR_Blue"></div>
+                  <div class="PR_Column2 PR_Row4 PR_transp PR_Yellow"></div>
+                  <div class="PR_Column3 PR_Row4 PR_transp PR_Black"></div>
+                  <div class="PR_Column4 PR_Row4 PR_transp PR_Red"></div>
+                  <div class="PR_Column5 PR_Row4 PR_transp PR_Pink"></div>
+            
+                  <div class="PR_Column1 PR_Row5 PR_transp PR_Pink"></div>
+                  <div class="PR_Column2 PR_Row5 PR_transp PR_Blue"></div>
+                  <div class="PR_Column3 PR_Row5 PR_transp PR_Yellow"></div>
+                  <div class="PR_Column4 PR_Row5 PR_transp PR_Black"></div>
+                  <div class="PR_Column5 PR_Row5 PR_transp PR_Red"></div>
+            
+                </div>
+              </div>
+              <div class="PB_Row3">
+                <div class="Row3_1">
+                  <div class="Row3_1_item"></div>
+                  <div class="Row3_1_item"></div>
+                  <div class="Row3_1_item"></div>
+                  <div class="Row3_1_item"></div>
+                  <div class="Row3_1_item"></div>
+                  <div class="Row3_1_item"></div>
+                  <div class="Row3_1_item"></div>
+                </div>
+                <div class="Row3_2"></div>
+              </div>
+            </div>
+
+      </div>
+  </div>
+</div>
+</div>
+</div>
+      <script src="dist/yourlib.js"></script>
+
+  <!-- 
+    <button onClick="sendMsg()" class="btn btn-primary" >Hit Me</button>
+  -->
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+          integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+          integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+          integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>

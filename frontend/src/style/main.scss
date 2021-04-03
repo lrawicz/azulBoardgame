@@ -1,0 +1,143 @@
+@import 'room.scss','factories.scss';
+@import 'privateBoard.scss','publicBoard.scss';
+@import 'coins.scss';
+@import 'main2.scss';
+@import 'animation.scss';
+
+
+
+body{
+    overflow: hidden;
+}
+
+
+#loginError{
+    color:rgb(219, 28, 28);
+}
+.lobby{
+    background: green;
+    position:absolute;
+    z-index:2;
+    top:0;
+    height: 100%;
+    width: 100%;
+}
+@keyframes openGame {
+    from {left: 100%;}
+    to {left: 0%;}
+}
+@keyframes closeGame {
+    from {left: 0%;}
+    to {left: 100%;}
+}
+@keyframes resizeRoom {
+    from {left: 0%;}
+    to {left: 100%;}
+}
+.game{
+    background: brown;
+    position:absolute;
+    z-index:3;
+    top:0;
+    left:0%;
+    height: 100%;
+    width: 100%;
+    animation-duration: 1s;
+    animation-iteration-count:1;
+    animation-timing-function: ease-in-out;
+    display: grid;
+    background-image: url("../images/space.jpeg");
+
+}
+.game_left{
+    width: 50%;
+    height: 100%;
+    position:absolute ;
+    
+    display:flex;
+}
+#game_border_left{
+    height: 100%;
+    width: 5%;
+    background-color: grey;
+}
+.transparent{
+    opacity:0%;
+}
+.showAsRows{
+    display:flex;
+    grid-template-rows: repeat(2, 2fr); 
+}
+.showAsColumns{
+    display:flex;
+    grid-template-columns: repeat(2, 2fr); 
+
+
+}
+.flex{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.example{
+    width: 30%;
+    height: 30%;
+    background-color: purple;
+    z-index: 30;
+}
+
+
+.green{
+    width:70px;
+    height:70px;
+    width: 200px;
+    height: 200px;
+    background-color: green;
+    /*transform: translate(-50%,-50%);*/
+    background-color:green;
+    border-radius: 100%;
+}
+
+/*.fabric>div{
+    position: relative;
+}*/
+
+
+    .hide{
+        display:none;
+    }
+    .tile{
+        width: var(--coinSize);
+        height: var(--coinSize);
+        border-radius: 100%;
+    }
+
+  
+
+    .transparentAnim{
+        -webkit-animation: flip_animation 2s ease;
+        -webkit-animation-iteration-count: infinite;
+    }
+    @keyframes flip_animation {
+    from {transform: rotateY(0deg);}
+    to {transform: rotateY(360deg);}
+    }
+
+    @-webkit-keyframes fadeInFromNone {
+    0% {
+        display: none;
+        opacity: 20%;
+    }
+
+    50% {
+        display: block;
+        opacity: 85%;
+    }
+
+    100% {
+        display: block;
+        opacity: 20%;
+    }
+}
+

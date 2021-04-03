@@ -1,0 +1,92 @@
+:root{
+    --giroBase:calc(360deg/7);
+    --distancia:calc(max(15vw,15vh));
+    --fabricSize:calc(max(10vw,10vh));
+    --fabricsAmount:7;
+}
+
+.publicBoard{
+    height: 100%;
+    width: 100%;
+    background-color: transparent;
+}
+.factory{ 
+    grid-column-gap: 100px;
+    grid-row-gap: 100px;
+    background-color:rgb(105, 13, 224);
+    position:absolute;
+    //top:calc(calc(var(--fabricSize)/2)*-1);
+    //left:calc(calc(var(--fabricSize)/2)*-1);
+    width:var(--fabricSize);
+    height:var(--fabricSize);
+    border-radius: 100%;
+    background-image: url("../images/fabricBack.png");
+    background-size:cover;
+
+}   
+
+
+/*.fabric_inside {
+    background: transparent;
+    width: 80%;
+    height: 80%;
+    position: absolute;
+    display: grid;
+    grid-template-columns: auto auto;
+    left: 8%;
+    top: 8%;
+
+}*/
+@for $i from 1 through 11 {
+    .factory#{$i}_show{
+        
+        -webkit-animation:  factory#{$i}_show 2s;
+        -webkit-animation-iteration-count: 1;
+        transform:rotate(calc(calc(var(--giroBase)*#{$i})*1))
+                    translate(var(--distancia))
+                  rotate(calc(calc(var(--giroBase)*#{$i})*-1));
+
+    }
+    .factory#{$i}_hide{
+        -webkit-animation: factory#{$i}_hide 2s;
+        -webkit-animation-iteration-count: 1;
+        transform: rotate(calc(var(--giroBase)*calc(#{$i - 4}*1)))
+            translate(0px) 
+            rotate(calc(var(--giroBase)*calc(#{$i - 4}*-1)));
+    }
+
+    @-webkit-keyframes factory#{$i}_show
+    {
+
+        //rotate(calc(var(--giroBase)*calc(#{$i - 1}*1)))
+        from {
+            transform: rotate(calc(var(--giroBase)*calc(#{$i - 4}*1)))
+                    translate(0px) 
+                    rotate(calc(var(--giroBase)*calc(#{$i - 4}*-1))); 
+        }
+        
+        to {
+        transform:rotate(calc(calc(var(--giroBase)*#{$i})*1))
+                    translate(var(--distancia))
+                  rotate(calc(calc(var(--giroBase)*#{$i})*-1));
+        }
+    }
+    @-webkit-keyframes factory#{$i}_hide
+    {
+        to {
+            transform: rotate(calc(var(--giroBase)*calc(#{$i - 4}*1)))
+                        translate(0px) 
+                        rotate(calc(var(--giroBase)*calc(#{$i - 4}*-1)));
+        }
+        
+        from {
+            transform:rotate(calc(calc(var(--giroBase)*#{$i})*1))
+                                translate(var(--distancia))
+                            rotate(calc(calc(var(--giroBase)*#{$i})*-1));
+        }
+    }
+}
+
+
+
+

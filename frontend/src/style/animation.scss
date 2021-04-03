@@ -1,0 +1,22 @@
+
+@for $i from 1 through 10 {
+    .PW_Anim#{$i}{
+        animation: resizePW_Base 1s ;
+        -webkit-animation-iteration-count: 1;
+        -webkit-animation-delay: #{$i * 0.5s};
+    }
+}
+@-webkit-keyframes resizePW_Base
+{
+    0% {
+    transform: scale(1);
+    }
+    50%{
+    transform: scale(1.5);
+    }
+    100%{
+    transform: scale(1);
+
+    }
+}
+

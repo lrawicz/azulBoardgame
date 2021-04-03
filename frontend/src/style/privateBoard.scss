@@ -1,0 +1,45 @@
+:root{
+    --ranger_size:2.4vw;
+}
+@import 'PrivB_row1.scss','PrivB_row2.scss','PrivB_row3.scss';
+.game_right{
+    width: 50%;
+    height: 100%;
+    left:50%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.private_board{
+    width: 100%;
+    height: 100%;
+    background-color: rgb(7, 8, 119);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+
+
+.row2{
+    width: 100%;
+    height: 100%;
+    background-color: royalblue;
+}
+
+
+.logo{
+    background-image: url("../images/logo.jpeg");
+    grid-row: 2/1 ;
+    grid-column: 1/2 ;
+    height: 100%;
+    justify-self: stretch;
+    z-index:40;
+    background-repeat:no-repeat;
+    background-size:100% 100%;
+}

@@ -1,0 +1,56 @@
+:root{
+    --coinSize:calc(max(3vh,3vw));
+}
+.coin{
+    width: var(--coinSize);
+    height: var(--coinSize);
+    background-size:100% 100%;
+    border-radius: 100%;
+}
+
+.factory > .coin {
+    position:absolute;
+}
+.factory >.coin:nth-child(1) {left: 10%;top: 10%;}
+.factory >.coin:nth-child(2) {left: 10%;top: 50%;}
+.factory >.coin:nth-child(3) {left: 50%;top: 10%;}
+.factory > .coin:nth-child(4) {left: 50%;top: 50%;}
+
+.coinRed{background-image: url("../images/red.jpg");}
+.coinBlue{background-image: url("../images/blue.jpg");}
+.coinYellow{background-image: url("../images/yellow.jpg");}
+.coinPink{background-image: url("../images/pink.jpg");}
+.coinBlack{background-image: url("../images/black.jpg");}
+.coinUndo{background-image: url("../images/Tyellow.jpg");}
+
+
+ 
+.PB_Right > div{
+    width: var(--coinSize);
+    height: var(--coinSize);
+    background-size:100% 100%;
+}
+.PB_Left > div{
+    width: var(--coinSize);
+    height: var(--coinSize);
+    background-size:100% 100%;
+
+}
+.PB_Left > div > div{
+    height: 100%;
+    width: 100%;
+}
+//ROW_1
+.PB_Row1 > div:nth-child(1) > .coin{
+    display: inline-grid;
+}
+
+.PR_Pink{background-image: url("../images/pink.png");}
+.PR_Red{background-image: url("../images/red.png");}
+.PR_Black{background-image: url("../images/black.png");}
+.PR_Yellow{background-image: url("../images/yellow.png");}
+.PR_Blue{background-image: url("../images/blue.png");}
+
+.doubleSize{
+    transform:scale(1.3) 
+}
