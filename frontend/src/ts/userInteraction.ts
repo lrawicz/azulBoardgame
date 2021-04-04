@@ -55,7 +55,7 @@ export function addCoinToPlace(color:string, row:number) {
 // Users Actions
 // pick
 export function pickClick(tile:HTMLElement) {
-    let fabricChoosen:number = parseInt(tile.offsetParent.id.substr(-1))
+    let fabricChoosen:string = tile.offsetParent.id
     factories_hideById(fabricChoosen)
     let children = tile.offsetParent.children
     let amount = 0
@@ -63,13 +63,11 @@ export function pickClick(tile:HTMLElement) {
     for (let index = 0; index < children.length; index++) {
         let child = children[index];
         if (child.classList[1] == tile.classList[1]) {
-            //WTF
+            //coin same color opacity =0%
             child.classList.add("transparent")
             amount += 1
         }
     }
-    tile.classList[1]
-    amount
 
     //private board
     let Row1_1 = document.getElementsByClassName("Row1_1")[0]
@@ -77,6 +75,7 @@ export function pickClick(tile:HTMLElement) {
     while (Row1_1.firstChild) {
         Row1_1.removeChild(Row1_1.firstChild);
     }
+    // REVISAR Esto no funciona
     if (Row1_2.firstChild) {
         Row1_2.removeChild(Row1_2.firstChild);
     }

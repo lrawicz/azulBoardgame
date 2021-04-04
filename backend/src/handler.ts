@@ -1,5 +1,5 @@
 //import { Room } from "socket.io"
-import { Iuser, Irooms, Igames, Ijugada}  from "./interfaces"
+import { Iuser, Irooms, Igames, Ijugada}  from "../../common/interfaces"
 import {Game, Room, Player} from "./classes"
 
 let rooms: Irooms ={}

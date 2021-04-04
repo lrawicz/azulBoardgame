@@ -2,20 +2,24 @@ import "./style/main.scss";
 //import  { test3} from "./ts/factories";
 //export { , test3}
 import {addCoinToPlace,pickClick,pickMouseOver,
-playCoinOver,playCoinClick,undo,score,setupFactories} from "./ts/firstload"
+playCoinOver,playCoinClick,undo,score,setupFactories} 
+from "./ts/userInteraction"
 import{
 factories_showAll,
 factories_showByID,
 factories_hideAll,
-factories_hideById
+factories_hideById,
+    createFactory
 } from "./ts/factories"
 export {
     addCoinToPlace, pickClick, pickMouseOver,
-    playCoinOver, playCoinClick, undo, score, setupFactories
+    playCoinOver, playCoinClick, undo, score, setupFactories,
+    createFactory
 }
 export function testLean() {
     console.log("testLean123")
 }
-factories_showAll(5)
+/*factories_showAll(5)*/
 
 export let factories = (document.getElementsByClassName('factory') as HTMLCollectionOf<HTMLElement>)
+createFactory(5)

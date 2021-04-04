@@ -2,8 +2,8 @@
 import {
     Iuser, Ijugada, Iplayer,
     GamePhase, Igame, Iroom,
-    Ifabric, Itile, IrowLeft, IobjectiveTile, IgameMode
-} from "./interfaces"
+    Ifactory, Itile, IrowLeft, IobjectiveTile, IgameMode
+} from "../../common/interfaces"
 
 export class Room implements Iroom{
     users: Iuser[]=[];
@@ -85,7 +85,7 @@ export class GameMode implements IgameMode{
         }
     }
 }
-export class Fabric implements Ifabric{
+export class Factory implements Ifactory{
     tiles: Itile[]=[]
     constructor(colors:string[]){
         colors.forEach(element => {
@@ -115,6 +115,16 @@ export class Fabric implements Ifabric{
         })
         return result
     }
+    addRandomColor(): void{
+
+        let allColors:string[] = this.tiles.map((x)=>{return x.color})
+        this.add(
+            allColors[
+                Math.floor(Math.random()*allColors.length)
+            ],
+            1)
+    }
+
 }
 
 export class Game implements Igame{
@@ -122,16 +132,16 @@ export class Game implements Igame{
     roomName: string;
     players: Iplayer[]=[];
     phase: GamePhase;
-    fabrics: Ifabric[];
-    bag: Ifabric
-    trash: Ifabric
+    factories: Ifactory[];
+    bag: Ifactory
+    trash: Ifactory
     turn: number;
     constructor(mode:string,room:Iroom){
         this.mode =new GameMode(mode)
         this.roomName =room.name
-        this.bag = new Fabric(this.mode.colors)
-        this.trash = new Fabric(this.mode.colors)
-        this.fabrics = []
+        this.bag = new Factory(this.mode.colors)
+        this.trash = new Factory(this.mode.colors)
+        this.factories = []
         let newPlayer:Iplayer;
         for (let index = 0; index < room.users.length; index++) {
             newPlayer = new Player(room.users[index], this.mode)
@@ -147,7 +157,7 @@ export class Game implements Igame{
         let fabricQuant: number        
         fabricQuant = room.users.length == 2 ? 6 : 6 + ((room.users.length - 2) * 2)
         for (let index = 0; index < fabricQuant; index++) {
-            this.fabrics.push(new Fabric(this.mode.colors))
+            this.factories.push(new Factory(this.mode.colors))
         }
         //assign to fabrics
         this.bagToFabrics(4)
@@ -155,11 +165,11 @@ export class Game implements Igame{
 
     }
     bagToFabrics(amountPerFabric:number):void{
-        let tempBag: Ifabric = new Fabric(this.mode.colors)
+        let tempBag: Ifactory = new Factory(this.mode.colors)
         let RND: number
         let RNDcolor: string
-        let cantidadFabrics:number = this.fabrics.length
-        for (let fabricI = 1; fabricI < cantidadFabrics; fabricI++) {
+        let cantidadFactories:number = this.factories.length
+        for (let fabricI = 1; fabricI < cantidadFactories; fabricI++) {
             for (let index = 0; index < amountPerFabric; index++) {
                 tempBag.tiles = this.bag.tiles.filter((x) => { return x.amount > 0 })
                 if (tempBag.tiles.length ==0){
@@ -174,7 +184,7 @@ export class Game implements Igame{
                 })
 
 
-                this.fabrics[fabricI].tiles = this.fabrics[fabricI].tiles.map((x) => {
+                this.factories[fabricI].tiles = this.factories[fabricI].tiles.map((x) => {
                     x.amount = x.color == RNDcolor ? x.amount + 1 : x.amount
                     return x
                 })
@@ -198,15 +208,15 @@ export class Game implements Igame{
         if (row.color != jugada.color) {
             return {event:"error",reason:"jugada invalida"}
         } else {
-            let amount: number = this.fabrics[0].remove(jugada.color)
+            let amount: number = this.factories[0].remove(jugada.color)
             //public board
             if (jugada.fabricIndex> 0) {
                 
-                let tempFabric:Ifabric = this.fabrics[jugada.fabricIndex]
+                let tempFabric:Ifactory = this.factories[jugada.fabricIndex]
                 tempFabric.tiles.forEach(tile => {
-                    this.fabrics[0].add(tile.color,tile.amount)
+                    this.factories[0].add(tile.color,tile.amount)
                 });
-                this.fabrics[jugada.fabricIndex] = new Fabric(this.mode.colors)
+                this.factories[jugada.fabricIndex] = new Factory(this.mode.colors)
             }
             //private board
             let total: number = row.used + amount

@@ -1,4 +1,3 @@
-import { Fabric } from "./classes";
 
 export interface Iuser {
     name: string;
@@ -55,15 +54,15 @@ export interface Igame {
     roomName: string;
     players: Iplayer[];
     phase: GamePhase;
-    fabrics: Ifabric[];
-    bag: Ifabric;
-    trash: Ifabric;
+    factories: Ifactory[];
+    bag: Ifactory;
+    trash: Ifactory;
     turn: number; //playerIndex
     mode: IgameMode;
 
-    pickTile: (jugada:Ijugada)=>void;
-    partialScore:()=>void;
-    finalScore: () => void;
+    pickTile(jugada:Ijugada):void;
+    partialScore():void;
+    finalScore(): void;
     updateUser(user: Iuser): void
 }
 export enum GamePhase{
@@ -72,10 +71,12 @@ export enum GamePhase{
     middlescore,
     finalscore,
 }
-export interface Ifabric {
+export interface Ifactory {
     tiles:Itile[]
     add: (color: string, amount: number)=>void
     remove: (color: string, amount?: number)=>number
+    addRandomColor(): void
+
 }
 export interface Itile{
     color: string, amount: number
