@@ -16,12 +16,24 @@
 .Row3_2{
     background-color: black;
 }
-.Row3_1_item{
-    background-color: blue;
+.Row3_1 > div{
     width: 80%;
     height: 80%;
     border-radius: 30%;
 }
+
+.hazard1{
+    background-color: rgb(21, 10, 172);
+}
+.hazard2{
+
+    background-color: pink;
+}
+.hazard3{
+    background-color: yellowgreen;
+
+}
+
 
 .active{
     background-color: black;

@@ -4,18 +4,16 @@
     height: 100%;
 }
 
-.PB_Left{
+.grid_places{
     height: 100%;
     background-color: white;
     position: relative;
     display: grid;
-    grid-template-columns: repeat(5, 2fr);  
-    grid-template-rows: repeat(5,  1fr);  
-    grid-gap: 10px;
+    grid-template-rows: repeat(5,  2fr);  
     width: 50%;
     grid-gap: 0;
-    align-items: center;
-    justify-items: center;
+    //align-items: center;
+    //justify-items: center;
 }
 .PB_divisor{width: 2.5%;height: 100%;position:relative;}
 .PB_Right{
@@ -56,8 +54,32 @@
 
 }
 
+@for $row from 1 to 6 {
 
+    .grid_placesRow#{$row} > div{
+        align-self:center;
+        justify-self: center;   
+        width: var(--coinSize);
+        height: var(--coinSize);
+        background-color: grey;
+        border-radius: 100%;
+    }
+    .grid_placesRow#{$row}{
+        width: 100%;
+        height: 100%;
+        grid-template-columns: repeat(5, 2fr);  
+        background-color: white;
+        display: grid;
 
+    }
+    @for $column from 1 to 5 {
+        .grid_placesRow#{$row} > div:nth-child(#{$column}){
+     
+            grid-column:#{6-$column};
+            grid-row:1
+        }
+    }
+}
 /*.PB_Right > div::content{
 /*.PB_RightTile::content{
     box-sizing: border-box;
@@ -67,16 +89,8 @@
     background: gray;
     opacity: 30%;
 }*/
-@for $i from 1 through 5 {
-    @for $n from 1 through $i{
-        #places#{$n}#{$i}{
-            width: var(--coinSize);
-            height: var(--coinSize);
-            border-radius: 100%;
-            background-color:grey;            
 
-            grid-row: #{$i} ;
-            grid-column: #{6-$n} ;
-        }
-    }
-}
+
+
+
+

@@ -13,16 +13,16 @@ function resetPlaces():void {
 
 }
 export function addCoinToPlace(color:string, row:number) {
+    let DOMRow = document.getElementsByClassName(`grid_placesRow${row}`)[0]
     let powerRangersRow = document.getElementsByClassName(`PR_Row${row} PR_${color} PR_transp`)
-    let placeRow = document.getElementsByClassName(`placeRow${row}`)
 
     if (powerRangersRow.length == 0) {
         return false
     }
     else {
         let firstEmptySpace = -1
-        for (let index = 0; index < placeRow.length; index++) {
-            const place = placeRow[index];
+        for (let index = 0; index < DOMRow.children.length; index++) {
+            const place = DOMRow.children[index];
 
             if (place.children.length == 0) {
                 firstEmptySpace = index
@@ -32,13 +32,13 @@ export function addCoinToPlace(color:string, row:number) {
         if (firstEmptySpace == -1) {
             return false
         } else { }
-        if (placeRow[0].children.length == 0
-            || placeRow[0].children[0].classList[1] == `coin${color}`) {
+        if (DOMRow.children[0].children.length == 0
+            || DOMRow.children[0].children[0].classList[1] == `coin${color}`) {
             let newCoin = document.createElement("div");
             newCoin.classList.add("coin")
             newCoin.classList.add(`coin${color}`)
             newCoin.classList.add("transparentAnim")
-            placeRow[firstEmptySpace].appendChild(newCoin)
+            DOMRow.children[firstEmptySpace].appendChild(newCoin)
             return true
         } else { false }
     }
@@ -53,7 +53,7 @@ export function addCoinToPlace(color:string, row:number) {
     //effectos locos
 }*/
 // Users Actions
-// pick
+// public board
 export function pickClick(tile:HTMLElement) {
     let fabricChoosen:string = tile.offsetParent.id
     factories_hideById(fabricChoosen)
@@ -106,21 +106,25 @@ export function pickMouseOver(tile:HTMLElement) {
         }
     }
 }
-//play
-export function playCoinOver(place:HTMLElement) {
-    let row:number = parseInt(place.classList[0].substr(8))
-    let coin:Element = document.getElementsByClassName("Row1_1")[0].children[0]
-    let amount:number = document.getElementsByClassName("Row1_1")[0].children.length
-    let color:string = coin.classList[1].substr(4)
-    let hazard:number = 0
-    //reset all places
-    resetPlaces()
+//private board
+export function playCoinOver(rowDOM:HTMLElement) {
+    //place.clientHeight
+    if (rowDOM.childElementCount> 0)
+    {
+        let row: number = Number(rowDOM.classList[0].substr(-1))
+        let coin: Element = document.getElementsByClassName("Row1_1")[0].children[0]
+        let amount:number = rowDOM.children.length
+        let color:string = coin.classList[1].substr(4)
+        let hazard:number = 0
+        //reset all places
+        resetPlaces()
 
-    while (amount > 0) {
-        if (!addCoinToPlace(color, row)) {
-            hazard += 1
+        while (amount > 0) {
+            if (!addCoinToPlace(color, row)) {
+                hazard += 1
+            }
+            amount -= 1
         }
-        amount -= 1
     }
 }
 export function playCoinClick() {

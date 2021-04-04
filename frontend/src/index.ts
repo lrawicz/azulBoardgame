@@ -11,6 +11,8 @@ factories_hideAll,
 factories_hideById,
     createFactory
 } from "./ts/factories"
+
+import {generatePrivateBoard} from "./ts/privateboard"
 export {
     addCoinToPlace, pickClick, pickMouseOver,
     playCoinOver, playCoinClick, undo, score, setupFactories,
@@ -23,3 +25,5 @@ export function testLean() {
 
 export let factories = (document.getElementsByClassName('factory') as HTMLCollectionOf<HTMLElement>)
 createFactory(5)
+
+generatePrivateBoard()
