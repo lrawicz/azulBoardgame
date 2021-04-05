@@ -80,6 +80,10 @@ export class Factory implements Ifactory {
 }
 
 export function createFactory(amount:number){
+    let factoriesDOM = document.getElementsByClassName("factories")[0]
+    while (factoriesDOM.childElementCount>0) {
+        factoriesDOM.removeChild(factoriesDOM.firstChild)
+    }
     for (let FactIndex = 0; FactIndex < amount; FactIndex++) {
         let Fact: Ifactory = new Factory(["Blue", "Yellow", "Black", "Red", "Pink"])
         for (let index = 0; index < 4; index++) {
@@ -100,8 +104,7 @@ export function createFactory(amount:number){
                 factoryDOM.appendChild(coinDOM)
             }
         })
-        let publicBoard = document.getElementsByClassName("publicBoard")[0]
-        publicBoard.appendChild(factoryDOM)
+        factoriesDOM.appendChild(factoryDOM)
     }
     factories_showAll()
 }
