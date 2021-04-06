@@ -41,17 +41,7 @@ function addCoinToPlace(color:string, row:number,transp:boolean=false) {
         return true
     } else { false }
 }
-/*function scoreRow(row:number) {
-    let placesRow = document.getElementsByClassName(`placeRow${row}`)
-    if (placesRow[row].classList.length > 1) {
-        let powerRangers = document.getElementsByClassName(`PR_Row${row} PR_${color} PR_transp`)
-        powerRangers[0].classList.remove("PR_transp")
-    }
-    //calcular puntaje
-    //effectos locos
-}*/
-// Users Actions
-// public board
+
 
 function addCoinsToRow(rowDOM: Element, transp: boolean = false) {
     let coins = document.getElementsByClassName("Row1_1")[0]
@@ -119,8 +109,6 @@ export function pickClick(tile:HTMLElement) {
 }
 export function pickMouseOver(tile:HTMLElement) {
 
-
-
     let parent = tile.offsetParent;
     parent.children[0].classList[1]
     let allCoins: HTMLCollectionOf<Element> = document.getElementsByClassName("coin")
@@ -150,122 +138,13 @@ export function placeOnClick(rowDOM: HTMLElement) {
 }
 //UnDo (WIP)
 export function undo() {
-    let tiles = document.getElementById("fabric" + fabricChoosen).children
+    let tiles = document.getElementById("factory" + fabricChoosen).children
     for (let index = 0; index < tiles.length; index++) {
         tiles[index].classList.remove("transparent")
     }
     //show_fabricsById(fabricChoosen) VOLVER
 }
 
-
-function sleep(ms:number) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-export function score(row:number = 3, color:string = "Red") {
-    let PR:Element = document.getElementsByClassName(`PR_Row${row} PR_${color}`)[0]
-    let column = 3//PR.classList[0].substr(-1)
-    let PRRowPlus1 = []
-    let PRRowLess1 = []
-    let PRColumnPlus1 = []
-    let PRColumnLess1 = []
-    let change:number = row
-    while (change < 6) {
-        change += 1
-        if (!document.getElementsByClassName
-            (`PR_Column${column} PR_Row${change} `)[0]
-            .classList.contains("PR_transp")) {
-            PRRowPlus1.push(`PR_Column${column} PR_Row${change} `)
-        } else {
-            break;
-        }
-    }
-    change = row
-    while (change > 1) {
-        change -= 1
-        if (!document.getElementsByClassName
-            (`PR_Column${column} PR_Row${change} `)[0]
-            .classList.contains("PR_transp")) {
-            PRRowLess1.push(`PR_Column${column} PR_Row${change} `)
-        } else { break }
-    }
-    change = column
-    while (change < 6) {
-        change += 1
-        if (!document.getElementsByClassName
-            (`PR_Column${change} PR_Row${row} `)[0]
-            .classList.contains("PR_transp")) {
-            PRColumnPlus1.push(`PR_Column${change} PR_Row${row} `)
-        } else { break }
-    }
-    change = column
-
-    while (change > 1) {
-        change -= 1
-        if (!document.getElementsByClassName
-            (`PR_Column${change} PR_Row${row} `)[0]
-            .classList.contains("PR_transp")) {
-            PRColumnLess1.push(`PR_Column${change} PR_Row${row} `)
-        } else { break }
-    }
-
-    /*function refresh_element(node:Element) {
-        node.style.setProperty('transform', 'translateZ(0)');
-        requestAnimationFrame(() => { node.style.removeProperty('transform'); });
-    }*/
-    /*function reanimate(DOM) {
-        DOM.style.webkitAnimation = 'none';
-        void DOM.offsetWidth;
-        DOM.style.webkitAnimation = '';
-    }*/
-    function agrandarArray(DOMclasses: string[], startBy:number = 1)  {
-        for (let index = 0; index < DOMclasses.length; index++) {
-            const DOMclass = DOMclasses[index];
-            const DOM = document.getElementsByClassName(DOMclass)[0]
-            //DOM.classList.add("doubleSize")
-            DOM.classList.add(`PW_Anim${startBy + index}`)
-            //refresh_element(DOM)
-            //reanimate(DOM)
-            //await sleep(500);
-            //DOM.style.transform = "scale(1)"
-            //DOM.classList.remove("doubleSize")
-        }
-        return DOMclasses.length + startBy
-    }
-    let num = 0
-    if ((PRRowPlus1.length + PRRowLess1.length + PRColumnPlus1.length + PRColumnLess1.length)
-        == 0) {
-        agrandarArray([`PR_Column${column} PR_Row${row} `], 1)
-        return 1
-    } else {
-        if (PRRowPlus1.length + PRRowLess1.length > 0) {
-            /*
-            num = agrandarArray(PRRowPlus1, 1)
-            num = agrandarArray(PRRowLess1, num + 1)
-            [`PR_Column${column} PR_Row${row} `]
-            */
-        }
-        if (PRColumnPlus1.length + PRColumnLess1.length > 0) {
-            /*
-            num = agrandarArray(PRColumnLess1, num)
-            num = agrandarArray(PRColumnLess1, num + 1),
-            */
-        }
-
-        //HACER COSAS LOCAS
-        /*
-        function cosaLoca(Dom, primera, segunda) {
-            .PW_AnimExtra {
-                animation: resizePW_Base 1s;
-                -webkit - animation - iteration - count: 2;
-                -webkit - animation - delay: (primera * 0.5s) (segunda * 0.5s);
-            }
-        }*/
-
-    }
-
-
-}
 
 export function setupFactories(totalPlayers:number) {
     let totalfabric:number = 2 + totalPlayers * 2

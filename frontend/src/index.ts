@@ -1,19 +1,15 @@
 import "./style/main.scss";
-//import  { test3} from "./ts/factories";
-//export { , test3}
-import {pickClick,pickMouseOver,
+import { pickClick,pickMouseOver,
         placeOnClick, placeOnEnter
-        ,undo,score} 
+    , undo, }
 from "./ts/userInteraction"
-import{
-    createFactory
-} from "./ts/factories"
-
-import {generatePrivateBoard} from "./ts/privateboard"
+import { generatePrivateBoard, createFactory} from "./ts/setup"
+import {  ScoreAnim_PR } from "./ts/animations";
+import { scorePartial } from "./ts/score";
 export {
     pickClick, pickMouseOver,
-    placeOnClick, placeOnEnter, undo, score,
-    createFactory
+    placeOnClick, placeOnEnter, undo, scorePartial,
+    createFactory, ScoreAnim_PR
 }
 
 

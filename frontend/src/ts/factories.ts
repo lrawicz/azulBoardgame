@@ -1,5 +1,4 @@
 import { pickClick, pickMouseOver } from "./userInteraction";
-import { Ifactory, Itile} from "../../../common/interfaces"
 export function factories_showAll() {
     let factories= Array.from(document.getElementsByClassName('factory') as HTMLCollectionOf<HTMLElement>)
     let giroBase = `${360 / factories.length}deg`
@@ -32,79 +31,8 @@ export function factories_hideAll() {
 
 }
 export function factories_hideById(id:string) {
-    console.log("WF",id)
     let factory = document.getElementById(id);
 
     factory.classList.remove(`${id}_show`);
     factory.classList.add(`${id}_hide`);
-}
-export class Factory implements Ifactory {
-    tiles: Itile[] = []
-    constructor(colors: string[]) {
-        colors.forEach(element => {
-            this.tiles.push({ color: element, amount: 0 })
-        });
-    }
-    add(color: string, amount: number): void {
-        this.tiles.map((x) => {
-            if (x.color == color) {
-                x.amount += amount
-            }
-            return x
-        })
-    }
-    remove(color: string, amount: number = 0): number {
-        let result: number = amount
-        this.tiles.map((x) => {
-            if (x.color == color) {
-                if (amount == 0) {
-                    result = x.amount
-                    x.amount = 0
-                } else {
-                    x.amount -= amount
-                }
-            }
-            return x
-        })
-        return result
-    }
-    addRandomColor(): void {
-        let allColors: string[] = this.tiles.map((x) => { return x.color })
-        this.add(
-            allColors[
-                Math.floor(
-                    Math.random() * allColors.length)],
-            1)
-    }
-
-}
-
-export function createFactory(amount:number){
-    let factoriesDOM = document.getElementsByClassName("factories")[0]
-    while (factoriesDOM.childElementCount>0) {
-        factoriesDOM.removeChild(factoriesDOM.firstChild)
-    }
-    for (let FactIndex = 0; FactIndex < amount; FactIndex++) {
-        let Fact: Ifactory = new Factory(["Blue", "Yellow", "Black", "Red", "Pink"])
-        for (let index = 0; index < 4; index++) {
-            Fact.addRandomColor()
-        }
-        
-        let factoryDOM: HTMLElement = document.createElement('div')
-        factoryDOM.setAttribute("id",`factory${FactIndex+1}`)
-        factoryDOM.classList.add(`factory`)
-        /*factoryDOM.classList.add(`factory${FactIndex}_show`)*/
-        Fact.tiles.map((coin)=>{
-            for (let index = 0; index < coin.amount; index++) {
-                let coinDOM: HTMLElement = document.createElement('div')
-                coinDOM.classList.add(`coin`)
-                coinDOM.classList.add(`coin${coin.color}`)
-                coinDOM.addEventListener('click', function (this) { pickClick(this)})
-                coinDOM.addEventListener('mouseover', function (this) { pickMouseOver(this) })
-                factoryDOM.appendChild(coinDOM)
-            }
-        })
-        factoriesDOM.appendChild(factoryDOM)
-    }
-    factories_showAll()
 }

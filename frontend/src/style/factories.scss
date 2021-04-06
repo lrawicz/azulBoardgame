@@ -28,8 +28,6 @@
     grid-row-gap: 100px;
     background-color:rgb(105, 13, 224);
     position:absolute;
-    //top:calc(calc(var(--fabricSize)/2)*-1);
-    //left:calc(calc(var(--fabricSize)/2)*-1);
     width:var(--fabricSize);
     height:var(--fabricSize);
     border-radius: 100%;
@@ -39,17 +37,7 @@
 }   
 
 
-/*.fabric_inside {
-    background: transparent;
-    width: 80%;
-    height: 80%;
-    position: absolute;
-    display: grid;
-    grid-template-columns: auto auto;
-    left: 8%;
-    top: 8%;
 
-}*/
 @for $i from 1 through 11 {
     .factory#{$i}_show{
         
