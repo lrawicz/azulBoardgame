@@ -14,7 +14,7 @@ let onceAnimationEnd = (el: HTMLElement, animation: string = "resizePW_Base 0.7s
 }
 
 export async function  ScoreAnim_PR  (PWClassess:string[] 
-    = ["PR_Pink", "PR_Pink", "PR_Black"]
+    = []
     ) {
     for (let index = 0; index < PWClassess.length; index++) {
         const element:HTMLElement = document.getElementsByClassName (PWClassess[index])[0] as HTMLElement;

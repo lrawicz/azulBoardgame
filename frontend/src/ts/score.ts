@@ -2,7 +2,11 @@ import { ScoreAnim_PR } from "./animations"
 
 
 export async function scorePartial(){
-    for (let index = 0; index < 6; index++) {
+    for (let index = 0; index < 5; index++) {
+        //Pre-animation1
+
+        //Pre-animation2
+        console.log(index)
         let rowData:string[] = scoreRow(index)
         await ScoreAnim_PR(rowData)
     }
@@ -10,28 +14,28 @@ export async function scorePartial(){
 
 function scoreRow(row:number):string[] {
     let DOMrows = document.getElementsByClassName("grid_places")[0] as HTMLElement
-        let DOMRow: HTMLElement = DOMrows.children[row] as HTMLElement
-        let places: [HTMLElement] = [].slice.call(DOMRow.children as (HTMLCollectionOf<HTMLElement>))
-        let EmptyPlaces: HTMLElement[] = places.
-        filter((place: HTMLElement) => {
-            return place.childElementCount == 0
-        })
-        if (EmptyPlaces.length == 0) {
-            let color: string = places[0].children[0].classList[1].substr(4)
+    let DOMRow: HTMLElement = DOMrows.children[row] as HTMLElement
+    let places: [HTMLElement] = [].slice.call(DOMRow.children as (HTMLCollectionOf<HTMLElement>))
+    let EmptyPlaces: HTMLElement[] = places.
+    filter((place: HTMLElement) => {
+        return place.childElementCount == 0
+    })
+    if (EmptyPlaces.length == 0) {
+        let color: string = places[0].children[0].classList[1].substr(4)
 
-            for (let index = 0; index < DOMRow.childElementCount; index++) {
-                const place: HTMLElement = DOMRow.children[index] as HTMLElement;
-                place.removeChild(place.firstChild)
-            }
-
-            //Remove PR_transp
-            
-            document.getElementsByClassName(`PR  PR_Row${row+1} PR_${color}`)[0]
-                .classList.remove("PR_transp")
-            //animation
-            let rowData:string[] =  scoreRow_data(row+1, color)
-            return rowData
+        for (let index = 0; index < DOMRow.childElementCount; index++) {
+            const place: HTMLElement = DOMRow.children[index] as HTMLElement;
+            place.removeChild(place.firstChild)
         }
+
+        //Remove PR_transp
+        
+        document.getElementsByClassName(`PR  PR_Row${row+1} PR_${color}`)[0]
+            .classList.remove("PR_transp")
+        //animation
+        let rowData:string[] =  scoreRow_data(row+1, color)
+        return rowData
+    }
 }
 function scoreRow_data(row: number = 3, color: string = "Red"):string[] {
     let PR: Element = document.getElementsByClassName(`PR_Row${row} PR_${color}`)[0]

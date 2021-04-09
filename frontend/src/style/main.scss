@@ -10,7 +10,11 @@ body{
     overflow: hidden;
 }
 
-
+.align{
+    display: grid;
+    align-items: center;
+    justify-items: center;
+}
 #loginError{
     color:rgb(219, 28, 28);
 }

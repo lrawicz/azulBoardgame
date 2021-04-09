@@ -1,5 +1,5 @@
 import "./style/main.scss";
-import { pickClick,pickMouseOver,
+import { pick, pickClick,pickFromFactory0,pickMouseOver,
         placeOnClick, placeOnEnter
     , undo, }
 from "./ts/userInteraction"
@@ -9,7 +9,7 @@ import { scorePartial } from "./ts/score";
 export {
     pickClick, pickMouseOver,
     placeOnClick, placeOnEnter, undo, scorePartial,
-    createFactory, ScoreAnim_PR
+    createFactory, ScoreAnim_PR, pickFromFactory0, pick
 }
 
 
