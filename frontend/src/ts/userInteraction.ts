@@ -1,7 +1,7 @@
 import { Ijugada } from '../../../common/interfaces';
 import { factories_hideById, factories_showByID } from './factories'
 let fabricChoosen:number;
-export let pick:{factory:number, color:string, amount:number};
+export let pick:{factory:number, color:string, amount:number}| null;
 //internal
 let factory0 = document.getElementsByClassName("factory0")[0]
 function resetPlaces():void {
@@ -45,6 +45,20 @@ function addCoinToPlace(color:string, row:number,transp:boolean=false) {
     } else { false }
 }
 
+function addToFactory0(color: string, amount: number) {
+    let factory0: Element = document.getElementsByClassName("factory0")[0]
+    let colorChild: Element;
+    for (let index = 0; index < factory0.childElementCount; index++) {
+        const child = factory0.children[index];
+        if (child.children[0].classList.contains(`coin${color}`)) {
+            colorChild = child
+            break
+        }
+    }
+    let prevVal: number = Number(colorChild.children[1].textContent)
+    colorChild.children[1].textContent = (prevVal + amount).toString()
+    if (!colorChild.classList.contains("fact0Active")) { colorChild.classList.add("fact0Active") }
+}
 
 function addCoinsToRow(rowDOM: Element, transp: boolean = false) {
     let coins = document.getElementsByClassName("Row1_1")[0]
@@ -117,20 +131,6 @@ export function pickClick(tile:HTMLElement) {
     addToRow_1(pick.color, pick.amount)
     addToFactory0(pick.color, pick.amount)
 }
-function addToFactory0(color:string,amount:number){
-    let factory0:Element  = document.getElementsByClassName("factory0")[0]
-    let colorChild:Element;
-    for (let index = 0; index < factory0.childElementCount; index++) {
-        const child = factory0.children[index];
-        if (child.children[0].classList.contains(`coin${color}`)){
-            colorChild = child
-            break
-        }
-    }
-    let prevVal:number = Number(colorChild.children[1].textContent)
-    colorChild.children[1].textContent =(prevVal+ amount).toString()
-    if (!colorChild.classList.contains("fact0Active")) { colorChild.classList.add("fact0Active")}
-}
 
 export function pickMouseOver(tile:HTMLElement) {
 
@@ -149,8 +149,10 @@ export function pickMouseOver(tile:HTMLElement) {
 }
 
 export function pickFromFactory0(div:HTMLElement){
-    if (div.classList.contains("fact0Active")){
+    if (pick != null){
         undo()
+    }
+    if (div.classList.contains("fact0Active")){
         let color:string = div.children[0].classList[1].substr(4)
         let amount:number= Number(div.children[1].textContent)
         div.children[1].textContent = "0"
@@ -174,7 +176,7 @@ export function placeOnClick(rowDOM: HTMLElement) {
 //UnDo (WIP)
 export function undo() {
 
-    if (!(pick == undefined)){
+    if (!(pick == null)){
         resetPlaces()
         cleanRow_1()
         let factory0Pick: Element
@@ -213,7 +215,8 @@ export function undo() {
             factory0Pick.children[1].textContent = String(pick.amount)
             factory0Pick.classList.add("fact0Active")
         }
-        pick = undefined
+        console.log("test")
+        pick = null
     }
 
 }
