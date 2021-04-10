@@ -13,13 +13,14 @@ let onceAnimationEnd = (el: HTMLElement, animation: string = "resizePW_Base 0.7s
     }).catch(console.log);;
 }
 
-export async function  ScoreAnim_PR  (PWClassess:string[] 
-    = []
-    ) {
+export async function  ScoreAnim_PR  (PWClassess:string[]=[]) {
+    let Score_adding: Element = document.getElementsByClassName("Score_adding")[0]
+    let base:string =  Score_adding.textContent 
+    let score:number = 0
     for (let index = 0; index < PWClassess.length; index++) {
         const element:HTMLElement = document.getElementsByClassName (PWClassess[index])[0] as HTMLElement;
-        console.log(PWClassess[index])
-        console.log(element)
+        score +=1
+        Score_adding.textContent = `${base}+${score}`
         await onceAnimationEnd(element, 'resizePW_Base 0.5s ')
         element.style.animation =""
     }

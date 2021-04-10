@@ -1,7 +1,11 @@
 import { ScoreAnim_PR } from "./animations"
+import { sleep } from "./general"
 
 
 export async function scorePartial(){
+    let score_1:Element = document.getElementsByClassName("Score_adding")[0]
+    let score_2: Element = document.getElementsByClassName("Row3_2")[0]
+    let totalScore:number = score_2.textContent == "" ?0: Number(score_2.textContent);
     for (let index = 0; index < 5; index++) {
         //Pre-animation1
 
@@ -9,7 +13,13 @@ export async function scorePartial(){
         console.log(index)
         let rowData:string[] = scoreRow(index)
         await ScoreAnim_PR(rowData)
+        
     }
+    await sleep(500)
+    let scores:number[]= score_1.textContent.split("+").map((x)=>{return Number(x)})
+    let scoreSum: number = scores.reduce((total, newVal) => { return total+newVal})
+    score_2.textContent = String(totalScore + scoreSum)
+    score_1.textContent = ""
 }
 
 function scoreRow(row:number):string[] {
