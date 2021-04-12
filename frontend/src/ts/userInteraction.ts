@@ -21,6 +21,9 @@ function resetPlaces():void {
 function addCoinToPlace(color:string, row:number,transp:boolean=false) {
     let DOMRow = document.getElementsByClassName(`grid_placesRow${row}`)[0]
     let powerRangersRow = document.getElementsByClassName(`PR_Row${row} PR_${color} PR_transp`)
+    if (powerRangersRow.length == 0){
+        return false
+    }
     let firstEmptySpace = -1
     for (let index = 0; index < DOMRow.children.length; index++) {
         const place = DOMRow.children[index];

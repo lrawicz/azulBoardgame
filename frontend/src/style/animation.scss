@@ -20,3 +20,27 @@
     }
 }
 
+
+@-webkit-keyframes moveCoinPlace
+{   0% {transform:  translateX(0vw)rotateY(0deg);}
+  100% {transform:  translateX(4.7vw)rotateY(calc(180deg*2));}
+}
+
+@for $var from 1 to 6 {
+    $mod: 4.6vw*$var;
+    $base: 1.2vw;
+    $total: $mod+$base;
+@-webkit-keyframes moveCoinPlace#{$var}{
+    0% {
+        /*transform:  translateX(0vw);*/
+    position: absolute;
+    z-index: 50;}
+    100% {transform:  
+        /*rotateZ(calc(360deg))*/
+        /*rotateX(calc(360deg))*/
+        translateX(1.2vw) translateX(calc(4.6vw*#{$var})) 
+        rotateY(calc(360deg*#{$var}))
+        ;
+    }
+}
+}

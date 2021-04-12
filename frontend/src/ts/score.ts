@@ -1,24 +1,44 @@
-import { ScoreAnim_PR } from "./animations"
+import {  animPlacesByRow, ScoreAnim_PR } from "./animations"
 import { sleep } from "./general"
 
 
 export async function scorePartial(){
     let score_1:Element = document.getElementsByClassName("Score_adding")[0]
-    let score_2: Element = document.getElementsByClassName("Row3_2")[0]
-    let totalScore:number = score_2.textContent == "" ?0: Number(score_2.textContent);
-    for (let index = 0; index < 5; index++) {
+    let score_2_1: Element = document.getElementsByClassName("Row3_2")[0].children[0]
+    let score_2_2: Element = document.getElementsByClassName("Row3_2")[0].children[1]
+    let totalScore: number = score_2_1.textContent == "" ? 0 : Number(score_2_1.textContent);
+    let DOMrows = document.getElementsByClassName("grid_places")[0] as HTMLElement
+    for (let row = 0; row < 5; row++) {
+        let DOMRow: HTMLElement = DOMrows.children[row] as HTMLElement
+        let places: [HTMLElement] = [].slice.call(DOMRow.children as (HTMLCollectionOf<HTMLElement>))
+        let EmptyPlaces: HTMLElement[] = places.
+            filter((place: HTMLElement) => {
+                return place.childElementCount == 0
+            })
+        if (EmptyPlaces.length == 0) {
+
+
+            await animPlacesByRow(row + 1)
+            let rowData: string[] = scoreRow(row)
+            await ScoreAnim_PR(rowData)
+
+
+        }
         //Pre-animation1
 
+
+        //await onceAnimationEnd(element, )
         //Pre-animation2
-        console.log(index)
-        let rowData:string[] = scoreRow(index)
-        await ScoreAnim_PR(rowData)
+         
+        //async_anim()
+
         
     }
     await sleep(500)
     let scores:number[]= score_1.textContent.split("+").map((x)=>{return Number(x)})
     let scoreSum: number = scores.reduce((total, newVal) => { return total+newVal})
-    score_2.textContent = String(totalScore + scoreSum)
+    score_2_1.textContent = String(totalScore + scoreSum)
+    score_2_2.textContent = `=${totalScore}+(${score_1.textContent})`
     score_1.textContent = ""
 }
 

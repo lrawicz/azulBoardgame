@@ -16,9 +16,19 @@
 .Row3_2{
     background-color: black;
     color:white;
+    grid-template-rows: 80% 20% ;
+    
+    display:grid;
+}
+.Row3_2 > div:nth-child(1){
     align-content:center;
     justify-content:center;
-    display:grid;
+    display: grid;
+}
+.Row3_2 > div:nth-child(2){
+    justify-content:center;
+    align-content:center;
+    display: grid;
 }
 .Row3_1 > div{
     width: 80%;

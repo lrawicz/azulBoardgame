@@ -4,12 +4,13 @@ import { pick, pickClick,pickFromFactory0,pickMouseOver,
     , undo, }
 from "./ts/userInteraction"
 import { generatePrivateBoard, createFactory} from "./ts/setup"
-import {  ScoreAnim_PR } from "./ts/animations";
+import {   ScoreAnim_PR } from "./ts/animations";
 import { scorePartial } from "./ts/score";
 export {
     pickClick, pickMouseOver,
     placeOnClick, placeOnEnter, undo, scorePartial,
-    createFactory, ScoreAnim_PR, pickFromFactory0, pick
+    createFactory, ScoreAnim_PR, pickFromFactory0, pick,
+    
 }
 
 
