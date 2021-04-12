@@ -20,10 +20,16 @@
     }
 }
 
+:root{
+    --placeDistance:calc(max(5.2vh,4.7vw));
+    --distanceBasePR:  calc(max(1.2vh,1.2vw));
+    --distanceByPR: calc(max(5.3vh,4.6vw));
 
+}
 @-webkit-keyframes moveCoinPlace
+
 {   0% {transform:  translateX(0vw)rotateY(0deg);}
-  100% {transform:  translateX(4.7vw)rotateY(calc(180deg*2));}
+  100% {transform:  translateX(var(--placeDistance))rotateY(calc(180deg*2));}
 }
 
 @for $var from 1 to 6 {
@@ -38,7 +44,7 @@
     100% {transform:  
         /*rotateZ(calc(360deg))*/
         /*rotateX(calc(360deg))*/
-        translateX(1.2vw) translateX(calc(4.6vw*#{$var})) 
+        translateX(var(--distanceBasePR)) translateX(calc(var(--distanceByPR)*#{$var})) 
         rotateY(calc(360deg*#{$var}))
         ;
     }

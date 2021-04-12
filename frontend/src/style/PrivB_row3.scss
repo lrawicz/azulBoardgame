@@ -9,9 +9,10 @@
     background-color: yellow;
     align-items: end;
     display: grid;
-    grid-template-columns: repeat(7,2fr) ;
     align-items: center;
     justify-items: center;
+    grid-template-columns: repeat(7,2fr) ;
+    grid-template-rows: 20% 80%;
 }
 .Row3_2{
     background-color: black;
@@ -31,20 +32,28 @@
     display: grid;
 }
 .Row3_1 > div{
+color:black;
+}
+.Row3_1 > div:nth-child(n+8){
     width: 80%;
     height: 80%;
     border-radius: 30%;
+    display: grid;
+    align-content: center;
+    justify-content: center;
 }
-
 .hazard1{
     background-color: rgb(21, 10, 172);
+    color:white
 }
 .hazard2{
 
     background-color: pink;
+    color:black
 }
 .hazard3{
     background-color: yellowgreen;
+    color:black
 
 }
 
