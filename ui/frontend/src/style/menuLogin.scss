@@ -1,0 +1,31 @@
+.mainLogin{
+    display:grid;
+    align-items: center;
+    justify-items: center;
+    background-color: black;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.mainLogin > div{
+    width: 40%;
+    height: 50%;
+    background-color: blue;
+    border-radius: 1vw;
+}
+
+.test{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 20% 60% 20%;
+    width: 100%;
+    height: 100%;
+}
+
+.test > button{
+    align-self: end;
+    justify-self: end;
+    grid-column: 2;
+    grid-row: 3;
+}

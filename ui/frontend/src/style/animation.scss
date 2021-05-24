@@ -38,12 +38,9 @@
     $total: $mod+$base;
 @-webkit-keyframes moveCoinPlace#{$var}{
     0% {
-        /*transform:  translateX(0vw);*/
     position: absolute;
     z-index: 50;}
     100% {transform:  
-        /*rotateZ(calc(360deg))*/
-        /*rotateX(calc(360deg))*/
         translateX(var(--distanceBasePR)) translateX(calc(var(--distanceByPR)*#{$var})) 
         rotateY(calc(360deg*#{$var}))
         ;
