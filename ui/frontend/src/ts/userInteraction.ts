@@ -1,6 +1,6 @@
-import { Ijugada } from '../../../common/interfaces';
+import { Ijugada } from '../../../../common/interfaces';
 import { factories_hideById, factories_showByID } from './factories'
-let fabricChoosen:number;
+let fabricChoosen:string;
 export let pick:{factory:number, color:string, amount:number}| null;
 //internal
 let factory0 = document.getElementsByClassName("factory0")[0]
@@ -58,14 +58,16 @@ function addToFactory0(color: string, amount: number) {
             break
         }
     }
-    let prevVal: number = Number(colorChild.children[1].textContent)
-    colorChild.children[1].textContent = (prevVal + amount).toString()
+    let childCoin = colorChild.children[1].textContent.split("->")
+    let prevVal: number = Number(childCoin[0])
+    let newVale: number = childCoin.length > 1 ? Number(childCoin[1])+amount:amount;
+    colorChild.children[1].textContent = prevVal + "->" + (prevVal + newVale).toString()
     if (!colorChild.classList.contains("fact0Active")) { colorChild.classList.add("fact0Active") }
 }
 
 function addCoinsToRow(rowDOM: Element, transp: boolean = false) {
     let coins = document.getElementsByClassName("Row1_1")[0]
-    
+
     if (rowDOM.childElementCount > 0 && coins.childElementCount>0) {
         let amount: number = coins.childElementCount
         let color: string = coins.children[0].classList[1].substr(4)
@@ -110,7 +112,7 @@ function addToRow_1(color:string,amount:number){
 }
 export function pickClick(tile:HTMLElement) {
     undo()
-    let fabricChoosen:string = tile.offsetParent.id
+    fabricChoosen = tile.offsetParent.id
     factories_hideById(fabricChoosen)
     let children = tile.offsetParent.children
     let amount = 0
@@ -124,19 +126,28 @@ export function pickClick(tile:HTMLElement) {
             amount += 1
         }
     }
-
+    
     //let jugada = {color, amount, 0} //volver 
     pick = {
         factory:Number(fabricChoosen.substr(-1)),
         color: color, amount:amount}
-    //private board
-    cleanRow_1()
-    addToRow_1(pick.color, pick.amount)
-    addToFactory0(pick.color, pick.amount)
-}
+        //private board
+        cleanRow_1()
+        addToRow_1(pick.color, pick.amount)
+        let childrens:HTMLCollection = tile.offsetParent.children ;
+        let notPicked
+        for (let index = 0; index < childrens.length; index++) {
+            const element = childrens[index];
+            if (element.classList[1].substr(4) != pick.color){
+                notPicked = element.classList[1].substr(4)
+                addToFactory0(notPicked, 1)
 
-export function pickMouseOver(tile:HTMLElement) {
-
+            }
+        }
+    }
+    
+    export function pickMouseOver(tile:HTMLElement) {
+        
     let parent = tile.offsetParent;
     parent.children[0].classList[1]
     let allCoins: HTMLCollectionOf<Element> = document.getElementsByClassName("coin")
@@ -152,12 +163,14 @@ export function pickMouseOver(tile:HTMLElement) {
 }
 
 export function pickFromFactory0(div:HTMLElement){
-    if (pick != null){
-        undo()
-    }
-    if (div.classList.contains("fact0Active")){
+    
+    let amount: number = Number(div.children[1].textContent.split("->")[0].replace(/\n/g, "").replace(/ /g, ""))
+    if (div.classList.contains("fact0Active") && amount>0){
+        if (pick != null){
+            undo()
+        }
         let color:string = div.children[0].classList[1].substr(4)
-        let amount:number= Number(div.children[1].textContent)
+        amount= Number(div.children[1].textContent)
         div.children[1].textContent = "0"
         console.log(color)
         console.log(amount)
@@ -173,18 +186,68 @@ export function placeOnEnter(rowDOM:HTMLElement) {
     addCoinsToRow(rowDOM,true)
 }
 export function placeOnClick(rowDOM: HTMLElement) {
+    //clean factory0
+    let factory0: Element = document.getElementsByClassName("factory0")[0]
+    for (let index = 0; index < factory0.children.length; index++) {
+
+        const coinFrom0 = factory0.children[index];
+        if (coinFrom0.classList.contains("factory0coinValue")){
+            const values = coinFrom0.children[1].textContent.split("->")
+            coinFrom0.children[1].textContent =values.length == 1 ? values[0] : values[1]
+        }
+    }
     addCoinsToRow(rowDOM,false)
     cleanRow_1()
 }
 //UnDo (WIP)
 export function undo() {
 
-    if (!(pick == null)){
+    if (pick != null){
         resetPlaces()
         cleanRow_1()
         let factory0Pick: Element
-
         let factory0: Element = document.getElementsByClassName("factory0")[0]
+        let coins0 = factory0.children
+        for (let index = 0; index < coins0.length; index++) {
+            const coin = coins0[index];
+            if (coin.classList.contains("factory0coinValue")){
+                const oldValue: number = Number(
+                    coin.children[1].textContent.split("->")[0]
+                    .replace(/\n/g, "").replace(/ /g, ""))
+                coin.children[1].textContent = String(oldValue)
+                console.log(index, oldValue)
+                if (oldValue== 0){
+                    coin.classList.remove("fact0Active")
+                }
+            }
+        }
+        let DomPicked: HTMLElement = document.getElementById(`factory${pick.factory}`)
+        DomPicked.classList.remove(`factory${pick.factory}_hide`)
+        DomPicked.classList.add(`factory${pick.factory}_show`)
+        for (let index = 0; index < DomPicked.children.length; index++) {
+            const coin = DomPicked.children[index];
+            coin.classList.remove("transparent")
+        } 
+        
+    }
+        
+        /*
+        // ToDo:
+        let DomPicked:HTMLElement = document.getElementById(`factory${pick.factory}`)
+        let childrenCoins = DomPicked.children
+        for (let index = 0; index < childrenCoins.length; index++) {
+            const coin = childrenCoins[index];
+            
+        }
+        // know factory picked
+            // for coins in factory picked
+            // if visible true
+            // remove from factory 0
+            */
+
+
+
+/*
         for (let index = 0; index < factory0.childElementCount; index++) {
             const child = factory0.children[index];
             if (child.children[0].classList.contains(`coin${pick.color}`)) {
@@ -193,7 +256,6 @@ export function undo() {
                 break;
             }
         }
-
 
 
 
@@ -221,7 +283,7 @@ export function undo() {
         console.log("test")
         pick = null
     }
-
+*/
 }
 
 

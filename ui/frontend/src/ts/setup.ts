@@ -1,5 +1,5 @@
 import { factories_showAll } from "./factories"
-import { Ifactory, Itile } from "../../../common/interfaces"
+import { Ifactory, Itile } from "../../../../common/interfaces"
 import { pickClick, pickMouseOver } from "./userInteraction"
 
 export function generatePrivateBoard(){
