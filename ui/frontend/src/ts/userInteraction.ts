@@ -233,69 +233,28 @@ export function undo() {
                 }
             }
         }
-        let DomPicked: HTMLElement = document.getElementById(`factory${pick.factory}`)
-        DomPicked.classList.remove(`factory${pick.factory}_hide`)
-        DomPicked.classList.add(`factory${pick.factory}_show`)
-        for (let index = 0; index < DomPicked.children.length; index++) {
-            const coin = DomPicked.children[index];
-            coin.classList.remove("transparent")
-        } 
-        
-    }
-        
-        /*
-        // ToDo:
-        let DomPicked:HTMLElement = document.getElementById(`factory${pick.factory}`)
-        let childrenCoins = DomPicked.children
-        for (let index = 0; index < childrenCoins.length; index++) {
-            const coin = childrenCoins[index];
+        if (pick.factory >0){
+            let DomPicked: HTMLElement = document.getElementById(`factory${pick.factory}`)
+            DomPicked.classList.remove(`factory${pick.factory}_hide`)
+            DomPicked.classList.add(`factory${pick.factory}_show`)
+            for (let index = 0; index < DomPicked.children.length; index++) {
+                const coin = DomPicked.children[index];
+                coin.classList.remove("transparent")
+            } 
+        }
+        if (pick.factory==0){
+            for (let index = 0; index < factory0.children.length; index++) {
+                const element = factory0.children[index];
+                if (element.children[0].classList[1] == `coin${pick.color}`){
+                    element.children[1].textContent = String(pick.amount)
+                    element.classList.add("fact0Active")
+                }
+            } 
             
         }
-        // know factory picked
-            // for coins in factory picked
-            // if visible true
-            // remove from factory 0
-            */
-
-
-
-/*
-        for (let index = 0; index < factory0.childElementCount; index++) {
-            const child = factory0.children[index];
-            if (child.children[0].classList.contains(`coin${pick.color}`)) {
-                factory0Pick = child;
-                
-                break;
-            }
-        }
-
-
-
-        if (pick.factory>0){
-            console.log("B")
-            let tiles = document.getElementById("factory" + pick.factory).children
-            for (let index = 0; index < tiles.length; index++) {
-                console.log("C")
-                tiles[index].classList.remove("transparent")
-            }
-            factories_showByID(pick.factory)
-            factory0Pick.children[1].textContent = 
-            String(
-                Number(factory0Pick.children[1].textContent) 
-                - pick.amount)
-            if (factory0Pick.children[1].textContent == "0"){
-                factory0Pick.classList.remove("fact0Active")
-            }
-            //factory0 + pick
-        }else{
-            console.log("D")
-            factory0Pick.children[1].textContent = String(pick.amount)
-            factory0Pick.classList.add("fact0Active")
-        }
-        console.log("test")
-        pick = null
+        
     }
-*/
+    pick = null
 }
 
 
