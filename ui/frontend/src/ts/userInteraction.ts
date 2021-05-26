@@ -49,6 +49,7 @@ function addCoinToPlace(color:string, row:number,transp:boolean=false) {
 }
 
 function addToFactory0(color: string, amount: number) {
+    console.log("color:",color,"amount",amount)
     let factory0: Element = document.getElementsByClassName("factory0")[0]
     let colorChild: Element;
     for (let index = 0; index < factory0.childElementCount; index++) {
@@ -134,15 +135,26 @@ export function pickClick(tile:HTMLElement) {
         //private board
         cleanRow_1()
         addToRow_1(pick.color, pick.amount)
-        let childrens:HTMLCollection = tile.offsetParent.children ;
-        let notPicked
-        for (let index = 0; index < childrens.length; index++) {
-            const element = childrens[index];
-            if (element.classList[1].substr(4) != pick.color){
-                notPicked = element.classList[1].substr(4)
-                addToFactory0(notPicked, 1)
 
+        let childrens:HTMLCollection = tile.offsetParent.children ;
+        let tmpCoinStrings:string[] =[];
+        let tmpCoinAmount:number[]= [];
+        for (let index = 0; index < childrens.length; index++) {
+            const tmpColor = childrens[index].classList[1].substr(4);
+            const indexOf: number = tmpCoinStrings.indexOf(tmpColor)
+            if (pick.color != tmpColor){
+                if (indexOf == -1){
+                    tmpCoinAmount.push(1)
+                    tmpCoinStrings.push(tmpColor)
+                }else{
+                    tmpCoinAmount[indexOf]++
+                }
             }
+        }
+        for (let index = 0; index < tmpCoinStrings.length; index++) {
+            const color = tmpCoinStrings[index];
+            const amount = tmpCoinAmount[index];
+            addToFactory0(color,amount)
         }
     }
     
@@ -194,7 +206,7 @@ export function placeOnClick(rowDOM: HTMLElement) {
         if (coinFrom0.classList.contains("factory0coinValue")){
             const values = coinFrom0.children[1].textContent.split("->")
             coinFrom0.children[1].textContent =values.length == 1 ? values[0] : values[1]
-        }
+            }
     }
     addCoinsToRow(rowDOM,false)
     cleanRow_1()
